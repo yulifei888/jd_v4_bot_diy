@@ -19,7 +19,7 @@ import_config_no_check jup
 ## 更新crontab，gitee服务器同一时间限制5个链接，因此每个人更新代码必须错开时间，每次执行git_pull随机生成。
 ## 每天次数随机，更新时间随机，更新秒数随机，至少4次，至多6次，大部分为5次，符合正态分布。
 random_update_jup_cron () {
-    if [[ $(date "+%-H") -le 4 ]] && [ -f $list_crontab_user ]; then
+    if [ -f $list_crontab_user ]; then
         local random_min=$(gen_random_num 60)
         local random_sleep=$(gen_random_num 56)
         local random_hour_array[0]=$(gen_random_num 5)
@@ -28,7 +28,7 @@ random_update_jup_cron () {
 
         for ((i=1; i<14; i++)); do
             j=$(($i - 1))
-            tmp=$(($(gen_random_num 3) + ${random_hour_array[j]} + 4))
+            tmp=$(($(gen_random_num 3) + ${random_hour_array[j]} + 2))
             [[ $tmp -lt 24 ]] && random_hour_array[i]=$tmp || break
         done
 
@@ -426,7 +426,7 @@ own脚本目录：$dir_own
 update_shell () {
     #echo -e "--------------------------------------------------------------\n"
     ## 更新jup任务的cron
-    #random_update_jup_cron
+    random_update_jup_cron
 
     ## 重置仓库romote url
     if [[ $JD_DIR ]] && [[ $ENABLE_RESET_REPO_URL == true ]]; then
