@@ -3,16 +3,15 @@
 
 1. jup.sh添加 https://ghproxy.com/ 前缀，对国内网络更友好
 2. v4mb.sh添加 https://ghproxy.com/ 前缀，对国内网络更友好
-3. 可选：开启财富岛热气球挂机
 
 # 使用方法
 1. 原教程第4、安装面板命令改为：
 ```
 wget -q https://ghproxy.com/https://raw.githubusercontent.com/feng1168/jd_v4_bot_diy/main/v4mb.sh -O v4mb.sh && chmod +x v4mb.sh && ./v4mb.sh
 ```
-2. diy.sh底部添加下面的代码，config.sh中EnableJupDiyShell的值改为true
+2. 打开网页控制面板，“自定义脚本”底部添加如下代码并保存，“首页配置”中EnableJupDiyShell的值改为true
 ```
-echo -e "======================== 加载feng1168的diy ========================\n"
+echo -e "====================== 加载feng1168的diy ======================\n"
 ping -W1 -c1 https://ghproxy.com/https://raw.githubusercontent.com >/dev/null 2>&1
 if [ $? = 0 ]; then
   echo -e "正在加载...\n"
@@ -21,25 +20,5 @@ if [ $? = 0 ]; then
   echo -e "加载完成\n"
 else
   echo -e "无法下载，请检查网络\n"
-fi
-
-export ENABLE_HANGUP=true     #开启财富岛热气球挂机
-if [[ $ENABLE_HANGUP == true ]]; then
-   echo -e "======================== 启动挂机程序 ========================\n"
-   pm2 id jd_cfd_loop
-   hangup_check_results=$(pm2 id jd_cfd_loop)
-   if [[ $hangup_check_results == "[]" ]]; then
-       . $JD_DIR/config/config.sh
-       if [[ $Cookie1 ]]; then
-           jtask hangup 2>/dev/null
-           echo -e "挂机程序启动成功...\n"
-       else
-           echo -e "config.sh中还未填入有效的Cookie，可能是首次部署容器，因此不启动挂机程序...\n"
-       fi
-   else
-   echo -e "挂机程序已经启动了.\n"
-   fi
-elif [[ ${ENABLE_HANGUP} == false ]]; then
-    echo -e "已设置为不自动启动挂机程序，跳过...\n"
 fi
 ```
