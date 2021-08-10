@@ -16,8 +16,6 @@ echo -e "======================== 加载feng1168的diy ========================\
 ping -W1 -c1 https://ghproxy.com/https://raw.githubusercontent.com >/dev/null 2>&1
 if [ $? = 0 ]; then
   echo -e "正在加载...\n"
-  rm -f jtask.sh
-  wget -q https://ghproxy.com/https://raw.githubusercontent.com/feng1168/jd_v4_bot_diy/main/jtask.sh -O jtask.sh && chmod +x jtask.sh
   rm -f jup.sh
   wget -q https://ghproxy.com/https://raw.githubusercontent.com/feng1168/jd_v4_bot_diy/main/jup.sh -O jup.sh && chmod +x jup.sh
   echo -e "加载完成\n"
@@ -25,6 +23,7 @@ else
   echo -e "无法下载，请检查网络\n"
 fi
 
+export ENABLE_HANGUP=true     #开启财富岛热气球挂机
 if [[ $ENABLE_HANGUP == true ]]; then
    echo -e "======================== 启动挂机程序 ========================\n"
    pm2 id jd_cfd_loop
