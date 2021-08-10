@@ -10,7 +10,7 @@
 ```
 wget -q https://ghproxy.com/https://raw.githubusercontent.com/feng1168/jd_v4_bot_diy/main/v4mb.sh -O v4mb.sh && chmod +x v4mb.sh && ./v4mb.sh
 ```
-2. diy.sh底部添加下面的代码，config.sh中EnableJupDiyShell的值改为true；可选：开启财富岛热气球挂机，diy.sh顶部的export ENABLE_HANGUP的值改为true
+2. diy.sh底部添加下面的代码，config.sh中EnableJupDiyShell的值改为true
 ```
 echo -e "======================== 加载feng1168的diy ========================\n"
 ping -W1 -c1 https://ghproxy.com/https://raw.githubusercontent.com >/dev/null 2>&1
